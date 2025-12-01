@@ -597,7 +597,7 @@ export default function App() {
       <footer className="site-footer">
         <div className="container footer-inner">
           <p>© {new Date().getFullYear()} Orange Systemz. All rights reserved.</p>
-          <p className="footer-credit">Desined by RJ</p>
+          <p className="footer-credit">Designed by RJ</p>
         </div>
       </footer>
     </>
