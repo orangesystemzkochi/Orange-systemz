@@ -450,97 +450,103 @@ export default function App() {
           </div>
         </section>
 
-        {/* LAPTOPS */}
+              {/* LAPTOPS – CATEGORY-BASED OFFERS */}
         <section id="laptops" className="section section-soft">
           <div className="container">
             <h2 className="section-title">Today’s Top Deals</h2>
             <div className="products-grid">
-              <article className="product-card">
-                <img
-                  src="/images/HP-R5.jpg"
-                  alt="HP 15 – R5 5000 Series"
-                  className="product-image"
-                />
-                <div className="product-body">
-                  <h3>HP 15 – R5 5000 Series</h3>
-                  <p className="product-specs">
-                    8GB RAM · 256GB SSD · 14&quot; FHD
-                  </p>
-                  <p className="product-price">₹24,900</p>
-                  <span className="product-tag">Warranty included</span>
-                  <a
-                    href="https://wa.me/917736012315?text=I%20am%20interested%20in%20HP%2015%20R5%205000%20Series"
-                    className="btn btn-primary btn-full"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() =>
-                      trackEvent("whatsapp_click", {
-                        event_category: "conversion",
-                        event_label: "product_HP_15_R5_5000",
-                      })
-                    }
-                  >
-                    Check Availability on WhatsApp
-                  </a>
-                </div>
-              </article>
-
-              <article className="product-card">
+              {/* GAMING LAPTOPS */}
+              <article className="product-card gaming">
                 <img
                   src="/images/Dell-Gaming.jpg"
-                  alt="Dell G Series – i5 12th Gen"
+                  alt="Gaming Laptops – graphics & workstation"
                   className="product-image"
                 />
                 <div className="product-body">
-                  <h3>Dell G Series – i5 12th Gen</h3>
+                  <h3>Gaming Laptops</h3>
                   <p className="product-specs">
-                    16GB RAM · 512GB SSD · 15.6&quot; FHD · 120Hz
+                    Graphic Laptops &amp; Workstations · High performance for Gaming,
+                    Design &amp; Video Editing.
                   </p>
-                  <p className="product-price">₹26,900</p>
-                  <span className="product-tag">Gamer's Choice</span>
+                  <p className="product-price">From ₹35,000+</p>
+                  <span className="product-tag">Best for Gaming &amp; Graphics</span>
                   <a
-                    href="https://wa.me/917736012315?text=I%20am%20interested%20in%20Dell%20G%20Series%20i5%2012th%20Gen"
-                    className="btn btn-primary btn-full"
+                    href="https://wa.me/917736012315?text=Hi%2C%20I%27m%20interested%20in%20Gaming%20Laptops%20%28graphics%20laptop%2C%20workstation%29.%20Please%20share%20today%27s%20best%20options."
+                    className="btn btn-primary btn-full btn-whatsapp"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() =>
                       trackEvent("whatsapp_click", {
                         event_category: "conversion",
-                        event_label: "product_Dell_G_i5_12th",
+                        event_label: "category_gaming_laptops",
                       })
                     }
                   >
-                    Check Availability on WhatsApp
+                    Check Gaming Stock on WhatsApp
                   </a>
                 </div>
               </article>
 
-              <article className="product-card">
+              {/* HOME / STUDENT LAPTOPS */}
+              <article className="product-card student">
                 <img
-                  src="/images/Lenovo-yoga.jpg"
-                  alt="Lenovo Yoga – i5 11th Gen"
+                  src="/images/HP-R5.jpg"
+                  alt="Home and Student Laptops – 10K to 20K range"
                   className="product-image"
                 />
                 <div className="product-body">
-                  <h3>Lenovo Yoga – i5 11th Gen</h3>
+                  <h3>Home / Student Laptops</h3>
                   <p className="product-specs">
-                    8GB RAM · 512GB SSD · 14&quot; 2K
+                    10K–20K Budget Range · Ideal for Online Classes, Coding
+                    Practice, Office Work &amp; Beginners.
                   </p>
-                  <p className="product-price">₹21,500</p>
-                  <span className="product-tag">Student choice</span>
+                  <p className="product-price">From ₹10,000 – ₹20,000</p>
+                  <span className="product-tag">Best Value Picks</span>
                   <a
-                    href="https://wa.me/917736012315?text=I%20am%20interested%20in%20Lenovo%20Yoga%20i5%2011th%20Gen"
-                    className="btn btn-primary btn-full"
+                    href="https://wa.me/917736012315?text=Hi%2C%20I%27m%20looking%20for%20Home%20%2F%20Student%20Laptops%20%2810K%E2%80%9320K%20range%2C%20coding%20%2F%20starter%20laptops%29.%20Please%20share%20what%27s%20available%20today."
+                    className="btn btn-primary btn-full btn-whatsapp"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() =>
                       trackEvent("whatsapp_click", {
                         event_category: "conversion",
-                        event_label: "product_Lenovo_Yoga_i5_11th",
+                        event_label: "category_home_student_laptops",
                       })
                     }
                   >
-                    Check Availability on WhatsApp
+                    Check Student Options on WhatsApp
+                  </a>
+                </div>
+              </article>
+
+              {/* HOME / BUSINESS DESKTOPS */}
+              <article className="product-card desktop">
+                <img
+                  src="/images/Lenovo-yoga.jpg"
+                  alt="Home and Business Desktops – heavy work & gaming"
+                  className="product-image"
+                />
+                <div className="product-body">
+                  <h3>Home / Business Desktops</h3>
+                  <p className="product-specs">
+                    Heavy Work Desktops · Coding Desktops · Gaming Desktops.
+                    Assembled and Branded Options.
+                  </p>
+                  <p className="product-price">Custom builds on budget</p>
+                  <span className="product-tag">For office &amp; hardcore use</span>
+                  <a
+                    href="https://wa.me/917736012315?text=Hi%2C%20I%27m%20interested%20in%20Home%20%2F%20Business%20Desktops%20%28heavy%20work%2C%20coding%20or%20gaming%20desktops%29.%20Please%20share%20your%20best%20options."
+                    className="btn btn-primary btn-full btn-whatsapp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("whatsapp_click", {
+                        event_category: "conversion",
+                        event_label: "category_home_business_desktops",
+                      })
+                    }
+                  >
+                    Check Desktop Options on WhatsApp
                   </a>
                 </div>
               </article>
