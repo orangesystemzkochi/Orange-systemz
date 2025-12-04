@@ -450,13 +450,13 @@ export default function App() {
           </div>
         </section>
 
-              {/* LAPTOPS – CATEGORY-BASED OFFERS */}
+      {/* LAPTOPS – CATEGORY-BASED OFFERS */}
         <section id="laptops" className="section section-soft">
           <div className="container">
             <h2 className="section-title">Today’s Top Deals</h2>
             <div className="products-grid">
               {/* GAMING LAPTOPS */}
-              <article className="product-card gaming">
+              <article className="product-card">
                 <img
                   src="/images/Dell-Gaming.jpg"
                   alt="Gaming Laptops – graphics & workstation"
@@ -465,14 +465,14 @@ export default function App() {
                 <div className="product-body">
                   <h3>Gaming Laptops</h3>
                   <p className="product-specs">
-                    Graphic Laptops &amp; Workstations · High performance for Gaming,
-                    Design &amp; Video Editing.
+                    Graphic Laptops & Workstations · High Performance for Gaming · 
+                    Design & Video Editing.
                   </p>
                   <p className="product-price">From ₹35,000+</p>
-                  <span className="product-tag">Best for Gaming &amp; Graphics</span>
+                  <span className="product-tag">Best for Gaming & Graphics</span>
                   <a
                     href="https://wa.me/917736012315?text=Hi%2C%20I%27m%20interested%20in%20Gaming%20Laptops%20%28graphics%20laptop%2C%20workstation%29.%20Please%20share%20today%27s%20best%20options."
-                    className="btn btn-primary btn-full btn-whatsapp"
+                    className="btn btn-primary btn-full"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() =>
@@ -488,7 +488,7 @@ export default function App() {
               </article>
 
               {/* HOME / STUDENT LAPTOPS */}
-              <article className="product-card student">
+              <article className="product-card">
                 <img
                   src="/images/HP-R5.jpg"
                   alt="Home and Student Laptops – 10K to 20K range"
@@ -497,14 +497,14 @@ export default function App() {
                 <div className="product-body">
                   <h3>Home / Student Laptops</h3>
                   <p className="product-specs">
-                    10K–20K Budget Range · Ideal for Online Classes, Coding
-                    Practice, Office Work &amp; Beginners.
+                    10K–20K Budget Range · Ideal for Online Classes · Coding
+                    Practice · Office Work & Beginners.
                   </p>
                   <p className="product-price">From ₹10,000 – ₹20,000</p>
                   <span className="product-tag">Best Value Picks</span>
                   <a
                     href="https://wa.me/917736012315?text=Hi%2C%20I%27m%20looking%20for%20Home%20%2F%20Student%20Laptops%20%2810K%E2%80%9320K%20range%2C%20coding%20%2F%20starter%20laptops%29.%20Please%20share%20what%27s%20available%20today."
-                    className="btn btn-primary btn-full btn-whatsapp"
+                    className="btn btn-primary btn-full"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() =>
@@ -520,7 +520,7 @@ export default function App() {
               </article>
 
               {/* HOME / BUSINESS DESKTOPS */}
-              <article className="product-card desktop">
+              <article className="product-card">
                 <img
                   src="/images/Lenovo-yoga.jpg"
                   alt="Home and Business Desktops – heavy work & gaming"
@@ -529,14 +529,14 @@ export default function App() {
                 <div className="product-body">
                   <h3>Home / Business Desktops</h3>
                   <p className="product-specs">
-                    Heavy Work Desktops · Coding Desktops · Gaming Desktops.
+                    Heavy Work Desktops · Coding Desktops · Gaming Desktops · 
                     Assembled and Branded Options.
                   </p>
-                  <p className="product-price">Custom builds on budget</p>
-                  <span className="product-tag">For office &amp; hardcore use</span>
+                  <p className="product-price">Custom Builds on Budget</p>
+                  <span className="product-tag">For Office & Hardcore Use</span>
                   <a
                     href="https://wa.me/917736012315?text=Hi%2C%20I%27m%20interested%20in%20Home%20%2F%20Business%20Desktops%20%28heavy%20work%2C%20coding%20or%20gaming%20desktops%29.%20Please%20share%20your%20best%20options."
-                    className="btn btn-primary btn-full btn-whatsapp"
+                    className="btn btn-primary btn-full"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() =>
