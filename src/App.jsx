@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Laptop, Wrench, Info, Phone } from "lucide-react";
 
+/* -------- ANALYTICS HELPER (GA4) -------- */
+
+function trackEvent(name, params = {}) {
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", name, params);
+  }
+}
+
 /* -------- NAV ITEMS SHARED BY HEADER + MOBILE -------- */
+
 const NAV_ITEMS = [
   { id: "hero", label: "Home", icon: Home },
   { id: "laptops", label: "Laptops", icon: Laptop },
@@ -16,7 +25,11 @@ const NAV_ITEMS = [
 function MobileCircleNav({ items, onItemClick }) {
   const [open, setOpen] = useState(false);
 
-  const handleItemClick = (id) => {
+  const handleItemClick = (id, label) => {
+    trackEvent("nav_click", {
+      event_category: "navigation",
+      event_label: `mobile_${label}`,
+    });
     onItemClick(id);
     setOpen(false);
   };
@@ -70,7 +83,7 @@ function MobileCircleNav({ items, onItemClick }) {
                     damping: 20,
                     delay: index * 0.05,
                   }}
-                  onClick={() => handleItemClick(item.id)}
+                  onClick={() => handleItemClick(item.id, item.label)}
                 >
                   <span className="circle-label">{item.label}</span>
                   <Icon className="circle-icon" />
@@ -87,7 +100,11 @@ function MobileCircleNav({ items, onItemClick }) {
 
 function GoogleReviewsSection() {
   useEffect(() => {
-    if (!document.querySelector('script[src="https://elfsightcdn.com/platform.js"]')) {
+    if (
+      !document.querySelector(
+        'script[src="https://elfsightcdn.com/platform.js"]'
+      )
+    ) {
       const script = document.createElement("script");
       script.src = "https://elfsightcdn.com/platform.js";
       script.async = true;
@@ -142,8 +159,12 @@ export default function App() {
     }
   };
 
-  const handleNavClick = (id) => (e) => {
+  const handleNavClick = (id, sourceLabel) => (e) => {
     e.preventDefault();
+    trackEvent("cta_click", {
+      event_category: "engagement",
+      event_label: sourceLabel || id,
+    });
     scrollToSection(id);
   };
 
@@ -164,12 +185,55 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  // Section view tracking (hero, services, laptops, about, contact)
+  useEffect(() => {
+    const sections = [
+      { id: "hero", label: "section_hero" },
+      { id: "services", label: "section_services" },
+      { id: "laptops", label: "section_laptops" },
+      { id: "about", label: "section_about" },
+      { id: "contact", label: "section_contact" },
+    ];
+
+    const observers = [];
+
+    sections.forEach((section) => {
+      const el = document.getElementById(section.id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          if (entry.isIntersecting) {
+            trackEvent("section_view", {
+              event_category: "engagement",
+              event_label: section.label,
+            });
+            observer.unobserve(el); // only track first view per session
+          }
+        },
+        { threshold: 0.4 }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach((obs) => obs.disconnect());
+    };
+  }, []);
+
   return (
     <>
       {/* HEADER */}
       <header className="site-header">
         <div className="container header-inner">
-          <a href="#hero" className="logo-wrap" onClick={handleNavClick("hero")}>
+          <a
+            href="#hero"
+            className="logo-wrap"
+            onClick={handleNavClick("hero", "nav_logo")}
+          >
             <img
               src="/images/Shop-Logo.png"
               alt="Orange Systemz"
@@ -181,7 +245,10 @@ export default function App() {
             <ul className="nav-links nav-links-desktop">
               {NAV_ITEMS.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} onClick={handleNavClick(item.id)}>
+                  <a
+                    href={`#${item.id}`}
+                    onClick={handleNavClick(item.id, `nav_${item.id}`)}
+                  >
                     {item.label}
                   </a>
                 </li>
@@ -194,6 +261,12 @@ export default function App() {
             className="btn btn-small btn-primary header-whatsapp"
             target="_blank"
             rel="noopener"
+            onClick={() =>
+              trackEvent("whatsapp_click", {
+                event_category: "conversion",
+                event_label: "header_whatsapp",
+              })
+            }
           >
             WhatsApp Now
           </a>
@@ -231,7 +304,7 @@ export default function App() {
               >
                 <motion.a
                   href="#laptops"
-                  onClick={handleNavClick("laptops")}
+                  onClick={handleNavClick("laptops", "hero_view_laptops")}
                   className="btn btn-primary btn-glow"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
@@ -246,6 +319,12 @@ export default function App() {
                   className="btn btn-outline btn-glow-outline"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
+                  onClick={() =>
+                    trackEvent("whatsapp_click", {
+                      event_category: "conversion",
+                      event_label: "hero_whatsapp_best_deal",
+                    })
+                  }
                 >
                   WhatsApp for Best Deal
                 </motion.a>
@@ -292,7 +371,7 @@ export default function App() {
                 </p>
                 <a
                   href="#laptops"
-                  onClick={handleNavClick("laptops")}
+                  onClick={handleNavClick("laptops", "services_view_laptops")}
                   className="card-link"
                 >
                   View laptops →
@@ -307,7 +386,7 @@ export default function App() {
                 </p>
                 <a
                   href="#contact"
-                  onClick={handleNavClick("contact")}
+                  onClick={handleNavClick("contact", "services_book_service")}
                   className="card-link"
                 >
                   Book a service →
@@ -322,7 +401,7 @@ export default function App() {
                 </p>
                 <a
                   href="#contact"
-                  onClick={handleNavClick("contact")}
+                  onClick={handleNavClick("contact", "services_contact_sales")}
                   className="card-link"
                 >
                   Contact sales →
@@ -394,6 +473,12 @@ export default function App() {
                     className="btn btn-primary btn-full"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("whatsapp_click", {
+                        event_category: "conversion",
+                        event_label: "product_HP_15_R5_5000",
+                      })
+                    }
                   >
                     Check Availability on WhatsApp
                   </a>
@@ -418,6 +503,12 @@ export default function App() {
                     className="btn btn-primary btn-full"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("whatsapp_click", {
+                        event_category: "conversion",
+                        event_label: "product_Dell_G_i5_12th",
+                      })
+                    }
                   >
                     Check Availability on WhatsApp
                   </a>
@@ -442,6 +533,12 @@ export default function App() {
                     className="btn btn-primary btn-full"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("whatsapp_click", {
+                        event_category: "conversion",
+                        event_label: "product_Lenovo_Yoga_i5_11th",
+                      })
+                    }
                   >
                     Check Availability on WhatsApp
                   </a>
@@ -537,7 +634,10 @@ export default function App() {
               <div className="hero-actions">
                 <a
                   href="#laptops"
-                  onClick={handleNavClick("laptops")}
+                  onClick={handleNavClick(
+                    "laptops",
+                    "contact_view_available_laptops"
+                  )}
                   className="btn btn-primary btn-glow"
                 >
                   View Available Laptops
@@ -547,6 +647,12 @@ export default function App() {
                   className="btn btn-outline btn-glow-outline"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent("whatsapp_click", {
+                      event_category: "conversion",
+                      event_label: "contact_whatsapp_now",
+                    })
+                  }
                 >
                   WhatsApp Us Now
                 </a>
@@ -588,6 +694,12 @@ export default function App() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
+            onClick={() =>
+              trackEvent("whatsapp_click", {
+                event_category: "conversion",
+                event_label: "sticky_whatsapp_mobile",
+              })
+            }
           >
             WhatsApp for Today’s Best Deal
           </motion.a>
